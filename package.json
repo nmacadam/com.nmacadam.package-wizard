@@ -1,0 +1,15 @@
+{
+  "name": "com.nmacadam.package-wizard",
+  "version": "1.0.0",
+  "displayName": "Package Wizard",
+  "description": "Quickly generate a new package from an existing template.",
+  "license": " MIT",
+  "keywords": [
+    "package",
+    "wizard"
+  ],
+  "author": {
+    "name": "Nathan MacAdam",
+    "url": "https://github.com/nmacadam"
+  }
+}
