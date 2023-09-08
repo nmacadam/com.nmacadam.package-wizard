@@ -1,0 +1,11 @@
+{
+  "name": "com.$ORGANIZATION.$PACKAGE",
+  "version": "1.0.0",
+  "displayName": "$DISPLAY_NAME",
+  "description": "$DESCRIPTION",
+  $UNITY_VERSION
+  $DEPENDENCIES
+  "keywords": [
+    "$DISPLAY_NAME"
+  ],
+}
