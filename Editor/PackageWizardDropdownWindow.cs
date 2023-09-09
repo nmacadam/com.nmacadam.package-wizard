@@ -4,7 +4,6 @@ using UnityEditor;
 using UnityEditor.PackageManager.UI;
 using UnityEditorInternal;
 using UnityEngine;
-using Oni.Editor;
 
 namespace PackageWizard.Editor
 {
@@ -84,10 +83,10 @@ namespace PackageWizard.Editor
                     rect.y += EditorGUIUtility.standardVerticalSpacing / 2f;
                     
                     var element = _dependencies[index];
-                    var (nameRect, versionRect) = OniEditorGUI.SplitRectByWidthPercentagesWithSpacing(rect, EditorGUIUtility.standardVerticalSpacing, 2f / 3f, 1f / 3f);
+                    var (nameRect, versionRect) = PackageWizardGUI.SplitRectByWidthPercentagesWithSpacing(rect, EditorGUIUtility.standardVerticalSpacing, 2f / 3f, 1f / 3f);
 
                     // Draw package name field
-                    bool isNameValid = OniEditorGUI.ValidatedTextField(
+                    bool isNameValid = PackageWizardGUI.ValidatedTextField(
                         nameRect, 
                         element.PackageName, 
                         "",
@@ -108,7 +107,7 @@ namespace PackageWizard.Editor
                     // Disable the semver field and don't assess if it has errors until there is a package name
                     using (new EditorGUI.DisabledScope(!isNameValid))
                     {
-                        if (!OniEditorGUI.ValidatedTextField(versionRect,
+                        if (!PackageWizardGUI.ValidatedTextField(versionRect,
                                 element.Version,
                                 "semver",
                                 PackageValidation.ValidateVersion,
@@ -141,10 +140,10 @@ namespace PackageWizard.Editor
             using (new EditorGUILayout.VerticalScope(_dropdownStyle))
             {
                 // Draw header
-                OniEditorGUI.LabelWithIcon(new GUIContent("Add new package"), EditorGUIUtility.IconContent("Package Manager"), EditorStyles.boldLabel);
+                PackageWizardGUI.LabelWithIcon(new GUIContent("Add new package"), EditorGUIUtility.IconContent("Package Manager"), EditorStyles.boldLabel);
 
                 // Draw package, organization, and display name fields, validating that they are not null and meet package naming requirements
-                if (!OniEditorGUI.ValidatedTextField(_name, "name*", PackageValidation.ValidateName, out _name))
+                if (!PackageWizardGUI.ValidatedTextField(_name, "name*", PackageValidation.ValidateName, out _name))
                 {
                     if (string.IsNullOrEmpty(_name))
                     {
@@ -155,7 +154,7 @@ namespace PackageWizard.Editor
                         _errors.Add(ErrorPriority.PackageName, "Invalid character in package name");
                     }
                 }
-                if (!OniEditorGUI.ValidatedTextField(_organization, "organization*", PackageValidation.ValidateOrganizationName, out _organization))
+                if (!PackageWizardGUI.ValidatedTextField(_organization, "organization*", PackageValidation.ValidateOrganizationName, out _organization))
                 {
                     if (string.IsNullOrEmpty(_name))
                     {
@@ -166,13 +165,13 @@ namespace PackageWizard.Editor
                         _errors.Add(ErrorPriority.PackageOrganization, "Invalid character in organization name");
                     }
                 }
-                if (!OniEditorGUI.ValidatedTextField(_displayName, "display name*", value => !string.IsNullOrEmpty(value), out _displayName))
+                if (!PackageWizardGUI.ValidatedTextField(_displayName, "display name*", value => !string.IsNullOrEmpty(value), out _displayName))
                 {
                     _errors.TryAdd(ErrorPriority.RequiredFieldEmpty, "*Required");
                 }
                 
                 // Draw description field (optional)
-                _description = OniEditorGUI.TextArea(_description, "description", GUILayout.Height(EditorGUIUtility.singleLineHeight * 4f));
+                _description = PackageWizardGUI.TextArea(_description, "description", GUILayout.Height(EditorGUIUtility.singleLineHeight * 4f));
                 
                 // Drawing this after all of the text fields for *cleanliness*
                 using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
@@ -184,14 +183,14 @@ namespace PackageWizard.Editor
                         _hasMinimalUnityVersion = EditorGUILayout.ToggleLeft("Minimal Unity Version", _hasMinimalUnityVersion);
                         if (_hasMinimalUnityVersion)
                         {
-                            OniEditorGUI.UnityVersionField(ref _unityVersion.Major, ref _unityVersion.Minor, ref _unityVersion.Release);
+                            PackageWizardGUI.UnityVersionField(ref _unityVersion.Major, ref _unityVersion.Minor, ref _unityVersion.Release);
                         }
 
                         _initializeGitRepo = EditorGUILayout.ToggleLeft("Initialize Git Repository", _initializeGitRepo);
 
                         // Optionally override the assembly definition naming in the template
                         _asmdefPrefix =
-                            OniEditorGUI.TextFormatPreviewField(_asmdefPrefix, "asmdef prefix", value => $"{value}.Runtime");
+                            PackageWizardGUI.TextFormatPreviewField(_asmdefPrefix, "asmdef prefix", value => $"{value}.Runtime");
                     
                         // Draw package dependency list
                         _dependencyList.DoLayoutList();
@@ -202,7 +201,7 @@ namespace PackageWizard.Editor
                 EditorGUILayout.Space();
                 
                 // Draw footer
-                var (labelRect, buttonRect) = OniEditorGUI.SplitRectByWidthPercentages(EditorGUILayout.GetControlRect(), 2f / 3f, 1f / 3f);
+                var (labelRect, buttonRect) = PackageWizardGUI.SplitRectByWidthPercentages(EditorGUILayout.GetControlRect(), 2f / 3f, 1f / 3f);
                 if (_errors.Count == 0)
                 {
                     // Draw package name preview and enabled Create button
@@ -219,11 +218,11 @@ namespace PackageWizard.Editor
                 else
                 {
                     // Draw top priority error message and disabled create button
-                    using (new OniEditorGUI.ColorScope(Color.red))
+                    using (new PackageWizardGUI.ColorScope(Color.red))
                     {
                         EditorGUI.LabelField(labelRect, _errors.First().Value, EditorStyles.miniLabel);
                     }
-                    using (new OniEditorGUI.EnabledScope(false))
+                    using (new PackageWizardGUI.EnabledScope(false))
                     {
                         GUI.Button(buttonRect, "Create");
                     }

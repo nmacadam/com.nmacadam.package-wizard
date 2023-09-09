@@ -1,9 +1,7 @@
 {
     "name": "PackageWizard.Editor",
     "rootNamespace": "PackageWizard.Editor",
-    "references": [
-        "GUID:324e20cfb05d74643a42a99836214bcc"
-    ],
+    "references": [],
     "includePlatforms": [
         "Editor"
     ],
