@@ -18,6 +18,8 @@ appended (e.g. `package.json.template`). The Package Wizard will replace this pr
 | $DISPLAY_NAME | Package display name            | `Package Wizard`            |
 | $ASSEMBLY     | Prefix for assembly definitions | `<AssemblyPrefix>.Runtime`  |
 
+The default `Template~` configuration includes a GitHub Actions workflow for automatically updating the semantic version and change log, then publishing a new release upon changes.
+
 ## 🪛 Installation
 As the end-user, you can customize the contents of the `Template~` folder as necessary to fit your desired package layout and naming conventions.  To make sure the package contents are modifiable, you should either download this repository as a .zip file and manually add it to your project, or fork the repository and create your own version of Package Wizard.  
 
