@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/nmacadam/com.nmacadam.package-wizard/compare/1.0.0...1.0.1) (2023-09-09)
+
+
+### Bug Fixes
+
+* remove unaccessible package dependencies ([481548e](https://github.com/nmacadam/com.nmacadam.package-wizard/commit/481548ed54509df3a454d5b6a79affb73b665a04))
+
 # 1.0.0 (2023-09-08)
 
 
