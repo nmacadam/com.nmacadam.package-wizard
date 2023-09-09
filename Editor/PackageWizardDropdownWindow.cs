@@ -7,11 +7,6 @@ using UnityEngine;
 
 namespace PackageWizard.Editor
 {
-    // todo: add github CI/CD to package template
-    // todo: figure out an approach for nested repos
-    // todo: make Bento collection package
-    // todo: update template
-
     internal class PackageWizardDropdownWindow : EditorWindow
     {
         // basically just a big input form where we validate all the fields to make sure we don't generate
